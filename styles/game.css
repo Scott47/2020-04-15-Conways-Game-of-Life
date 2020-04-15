@@ -1,3 +1,7 @@
-#gridContainer {
+#grid-container {
     padding-bottom: 10px;
+}
+grid {
+    background-color: #C5D6C6;
+    border-spacing: 0;
 }

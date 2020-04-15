@@ -22,18 +22,34 @@ function buildGrid() {
 function createBoard() {
     var gridContainer = document.getElementById('grid-container');
    console.log("grid maybe?", gridContainer)
-   var table = document.createElement("table");
+   var grid = document.createElement("grid");
 
    for (var i = 0; i < rows; i++) {
-       var tableRow = document.createElement("tableRow");
+       var gridRow = document.createElement("gridRow");
        for (var j = 0; j < cols; j++) {//
-           var cell = document.createElement("tableCell");
+           var cell = document.createElement("gridCell");
            cell.setAttribute("id", i + "_" + j);
-           cell.setAttribute("class", "dead");
-           cell.onclick = cellClickHandler;
+           cell.setAttribute("class", "off");
+           cell.onclick = clickHandler;
            tr.appendChild(cell);
        }
-       table.appendChild(tableRow);
+       table.appendChild(gridRow);
    }
-   gridContainer.appendChild(table);
+   gridContainer.appendChild(grid);
    }
+
+
+   function clickHandler() {
+    var rowcol = this.id.split("_");
+    var row = rowcol[0];
+    var col = rowcol[1];
+    var classes = this.getAttribute("class");
+        if(classes.indexOf("live") > -1) {
+            this.setAttribute("class", "off");
+            grid[row][col] = 0;
+        } else {
+            this.setAttribute("class", "on");
+            grid[row][col] = 1;
+        }
+
+    }
