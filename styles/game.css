@@ -1,7 +1,18 @@
 #grid-container {
     padding-bottom: 10px;
 }
-grid {
+.grid {
     background-color: #C5D6C6;
     border-spacing: 0;
+}
+
+.gridCell {
+    border: 1px solid #F1F5DA;
+    border-radius: 3px;
+    width: 10px;
+    height: 10px;
+}
+body {
+    padding: 20px;
+    background-color: black;
 }

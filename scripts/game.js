@@ -10,46 +10,61 @@ var nextGrid = new Array(rows);
 var timer;
 var reproductionTime = 100;
 
-function buildGrid() {
-    for (var i = 0; i < rows; i++) {
-        grid[i] = new Array(cols);
-        nextGrid[i] = new Array(cols);
-    }
+// load initial game board grid
+function loadGrid() {
+    buildGrid();
 }
 
+function buildGrid() {
+  for (var i = 0; i < rows; i++) {
+    grid[i] = new Array(cols);
+    nextGrid[i] = new Array(cols);
+  }
+}
 
-// Create game board
-function createBoard() {
-    var gridContainer = document.getElementById('grid-container');
-   console.log("grid maybe?", gridContainer)
-   var grid = document.createElement("grid");
-
-   for (var i = 0; i < rows; i++) {
-       var gridRow = document.createElement("gridRow");
-       for (var j = 0; j < cols; j++) {//
-           var cell = document.createElement("gridCell");
-           cell.setAttribute("id", i + "_" + j);
-           cell.setAttribute("class", "off");
-           cell.onclick = clickHandler;
-           tr.appendChild(cell);
-       }
-       table.appendChild(gridRow);
-   }
-   gridContainer.appendChild(grid);
-   }
-
-
-   function clickHandler() {
+// click handler for when user clicks cell on grid and turns cell "on" or "off"
+function clickHandler() {
     var rowcol = this.id.split("_");
     var row = rowcol[0];
     var col = rowcol[1];
     var classes = this.getAttribute("class");
-        if(classes.indexOf("live") > -1) {
-            this.setAttribute("class", "off");
-            grid[row][col] = 0;
-        } else {
-            this.setAttribute("class", "on");
-            grid[row][col] = 1;
-        }
-
+    if (classes.indexOf("on") > -1) {
+      this.setAttribute("class", "off");
+      grid[row][col] = 0;
+    } else {
+      this.setAttribute("class", "on");
+      grid[row][col] = 1;
     }
+  }
+
+// Create game board grid
+function createGrid() {
+  var gridBoard = document.getElementById("grid-container");
+  console.log("grid maybe?", gridBoard);
+  var grid = document.createElement("grid");
+
+  for (var i = 0; i < rows; i++) {
+    var gridRow = document.createElement("gridRow");
+    for (var j = 0; j < cols; j++) {
+      //
+      var cell = document.createElement("gridCell");
+      cell.setAttribute("id", i + "_" + j);
+      cell.setAttribute("class", "off");
+      cell.onclick = clickHandler;
+      gridRow.appendChild(cell);
+    }
+    grid.appendChild(gridRow);
+  }
+  gridBoard.appendChild(grid);
+}
+
+
+
+// RULES
+// Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+// Any live cell with two or three live neighbours lives on to the next generation.
+// Any live cell with more than three live neighbours dies, as if by overcrowding.
+// Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+
+// fires grid as soon as object loads
+window.onload = loadGrid
