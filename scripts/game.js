@@ -3,7 +3,7 @@ var cols = 100;
 
 var playing = false;
 
-// define grid using new operator to create an instance of the grid object
+// define grid using 'new' operator to create an instance of the grid object
 var grid = new Array(rows);
 var nextGrid = new Array(rows);
 
@@ -24,18 +24,9 @@ function buildGrid() {
 
 // click handler for when user clicks cell on grid and turns cell "on" or "off"
 function clickHandler() {
-    var rowcol = this.id.split("_");
-    var row = rowcol[0];
-    var col = rowcol[1];
-    var classes = this.getAttribute("class");
-    if (classes.indexOf("on") > -1) {
-      this.setAttribute("class", "off");
-      grid[row][col] = 0;
-    } else {
-      this.setAttribute("class", "on");
-      grid[row][col] = 1;
-    }
-  }
+
+    // loop through array with class of "on" and set to "off" when clicked and vice versa
+
 
 // Create game board grid
 function createGrid() {
@@ -43,6 +34,7 @@ function createGrid() {
   console.log("grid maybe?", gridBoard);
   var grid = document.createElement("grid");
 
+//   loops through
   for (var i = 0; i < rows; i++) {
     var gridRow = document.createElement("gridRow");
     for (var j = 0; j < cols; j++) {
@@ -57,6 +49,7 @@ function createGrid() {
   }
   gridBoard.appendChild(grid);
 }
+
 
 
 
