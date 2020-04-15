@@ -10,16 +10,16 @@ var nextGrid = new Array(rows);
 var timer;
 var reproductionTime = 100;
 
-// load initial game board grid
-function loadGrid() {
-    buildGrid();
-}
+
 
 function buildGrid() {
   for (var i = 0; i < rows; i++) {
     grid[i] = new Array(cols);
     nextGrid[i] = new Array(cols);
   }
+}
+function loadGrid() {
+    buildGrid();
 }
 
 // click handler for when user clicks cell on grid and turns cell "on" or "off"
@@ -49,6 +49,7 @@ function createGrid() {
   }
   gridBoard.appendChild(grid);
 }
+// load initial game board grid
 
 
 
